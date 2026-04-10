@@ -1,5 +1,7 @@
+import { Cadastros } from "../cadastros/cadastros.model.js";
 import { Cadastro } from "./cadastro.model.js";
 import { CadastroService } from "./cadastro.service.js";
+import { CadastroView } from "./cadastro.view.js";
 
 export class CadastroController {
 
@@ -7,17 +9,21 @@ export class CadastroController {
     public readonly _nascimento: HTMLInputElement | null;
     public readonly _idade: HTMLInputElement | null
     private cadastroService = new CadastroService();
+    private cadastroView = new CadastroView('cadastros');
+    private cadastros = new Cadastros();
 
     constructor (
     ) {
         this._nome = document.querySelector('#nome');
         this._nascimento = document.querySelector('#data');
         this._idade = document.querySelector('#idade');
+        this.cadastroView.update(this.cadastros);
     }
 
     async cadastro(req: Cadastro) {
-        const response = this.cadastroService.cadastrar(req);
-        return response;
+        // const response = this.cadastroService.cadastrar(req);
+        this.cadastros.adicionar(req);
+        this.cadastroView.update(this.cadastros);
     }
 
     criarCadastro(): Cadastro {
@@ -25,7 +31,7 @@ export class CadastroController {
         const nome = String(this._nome?.value);
         const nascimento = this._nascimento ? new Date(this._nascimento?.value.replace(exp, ',')) : null;
         const idade = Number(this._idade?.value);
-        return { nome, nascimento, idade };
+        return new Cadastro( nome, nascimento, idade);
     }
     
 }

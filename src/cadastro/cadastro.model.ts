@@ -1,5 +1,9 @@
-export interface Cadastro {
-    nome: string;
-    nascimento: Date | null;
-    idade: number;
+export class Cadastro {
+    constructor(
+        public readonly nome: string, 
+        public readonly nascimento: Date | null, 
+        public readonly idade: number | null
+    ) {}
+
+
 }

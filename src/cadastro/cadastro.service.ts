@@ -1,3 +1,4 @@
+import { Cadastros } from "../cadastros/cadastros.model.js";
 import { Cadastro } from "./cadastro.model.js";
 
 export class CadastroService {
@@ -6,6 +7,7 @@ export class CadastroService {
             throw new Error("Dados do cadastro não recebido!");
         }
 
-        console.log("sucesso");
+        
     }
 }
+
