@@ -1,14 +1,9 @@
-import { Cadastros } from "../cadastros/cadastros.model";
-import { Cadastro } from "./cadastro.model";
+import { Cadastros } from "../cadastros/cadastros.model.js";
+import { View } from "../utils/View.js";
+import { Cadastro } from "./cadastro.model.js";
 
 
-export class CadastroView {
-
-    private elemento: HTMLElement;
-
-    constructor (seletor: string) {
-        this.elemento = document.querySelector(`#${seletor}`) as HTMLElement;
-    }
+export class CadastroView extends View<Cadastros> {
 
     template(cadastros: Cadastros): string {
         return `
@@ -29,7 +24,7 @@ export class CadastroView {
                                         ${cadastro.nome}
                                     </td>
                                     <td>
-                                        ${cadastro.nascimento}
+                                        ${new Intl.DateTimeFormat().format(cadastro.nascimento)}
                                     </td>
                                     <td>
                                         ${cadastro.idade}
@@ -41,9 +36,5 @@ export class CadastroView {
                 </tbody>
             </table>
         `;
-    }
-
-    update(cadastros: Cadastros): void {
-        this.elemento.innerHTML = this.template(cadastros);
     }
 }

@@ -14,17 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const req = cadastroController.criarCadastro();
-
-    await Swal.fire({
-        title: "Iniciando processo de cadastro!",
-        text: "Processando...",
-        icon: "info",
-        timer: 2000,
-        showConfirmButton: false
-    });
 
     try {
+
+      const req = cadastroController.criarCadastro();
 
       await CadastroValidate(req);
 
