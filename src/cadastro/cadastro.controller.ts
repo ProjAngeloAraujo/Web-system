@@ -1,5 +1,6 @@
 import { Cadastros } from "../cadastros/cadastros.model.js";
 import { MensagemView } from "../mensagem/mensagem.view.js";
+import { DiaSemana } from "../utils/Enums.js";
 import { Cadastro } from "./cadastro.model.js";
 import { CadastroService } from "./cadastro.service.js";
 import { CadastroView } from "./cadastro.view.js";
@@ -22,15 +23,18 @@ export class CadastroController {
         this.cadastroView.update(this.cadastros);
     }
 
-    async cadastro(req: Cadastro) {
+    public async cadastro(req: Cadastro) {
         // const response = this.cadastroService.cadastrar(req);
+        if(!this.ehDiaUtil(req.nascimento)) {
+            this.mensagemView.update('A pessoa não nasceu em um dia util!')
+            return;
+        };
         this.cadastros.adicionar(req);
-        this.cadastroView.update(this.cadastros);
-        this.mensagemView.update('Cadastro realizado com sucesso');
+        this.updateView();
         this.limparFormulario();
     }
 
-    criarCadastro(): Cadastro {
+    public criarCadastro(): Cadastro {
         const exp = /-/g;
         const nome = String(this._nome.value);
         const nascimento = new Date(this._nascimento.value.replace(exp, ','));
@@ -38,10 +42,19 @@ export class CadastroController {
         return new Cadastro( nome, nascimento, idade);
     }
 
-    limparFormulario(): void {
+    private limparFormulario(): void {
         this._nome.value = "";
         this._nascimento.value = "";
         this._idade.value = "";
+    }
+
+    private updateView(): void {
+        this.cadastroView.update(this.cadastros);
+        this.mensagemView.update('Cadastro realizado com sucesso');
+    }
+
+    private ehDiaUtil(data: Date): boolean {
+        return data.getDay() > DiaSemana.DOMINGO && data.getDay() < DiaSemana.SABADO;
     }
     
 }

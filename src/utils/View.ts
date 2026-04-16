@@ -9,5 +9,5 @@ export abstract class View<T> {
         this.elemento.innerHTML = this.template(model);
     }
 
-    abstract template(model: T): string;
+    protected abstract template(model: T): string;
 }

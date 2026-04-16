@@ -4,12 +4,12 @@ export class Cadastros {
    
     private Cadastros: Cadastro[] = [];
     
-    adicionar(cadastro: Cadastro) {
+    public adicionar(cadastro: Cadastro) {
         this.Cadastros.push(cadastro);
         console.log(this.listar());
     }
 
-    listar(): readonly Cadastro[] {
+    public listar(): readonly Cadastro[] {
         return this.Cadastros;
     }
 }

@@ -5,7 +5,7 @@ import { Cadastro } from "./cadastro.model.js";
 
 export class CadastroView extends View<Cadastros> {
 
-    template(cadastros: Cadastros): string {
+    protected template(cadastros: Cadastros): string {
         return `
             <table class="table table-hover table-bordered">
                 <thead>
@@ -24,7 +24,7 @@ export class CadastroView extends View<Cadastros> {
                                         ${cadastro.nome}
                                     </td>
                                     <td>
-                                        ${new Intl.DateTimeFormat().format(cadastro.nascimento)}
+                                        ${this.formatar(cadastro.nascimento)}
                                     </td>
                                     <td>
                                         ${cadastro.idade}
@@ -36,5 +36,9 @@ export class CadastroView extends View<Cadastros> {
                 </tbody>
             </table>
         `;
+    }
+
+    private formatar(data: Date): string {
+        return new Intl.DateTimeFormat().format(data);
     }
 }
