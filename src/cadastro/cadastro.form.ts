@@ -1,6 +1,7 @@
 declare const Swal: any;
 import { CadastroController } from "./cadastro.controller.js";
 import { CadastroValidate } from "./cadastro.validate.js";
+import { Cadastro } from "./cadastro.model.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
-      const req = cadastroController.criarCadastro();
+      const req = Cadastro.criaDe(cadastroController._nome, cadastroController._nascimento, cadastroController._idade);
 
       await CadastroValidate(req);
 

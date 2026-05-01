@@ -1,5 +1,7 @@
 import { Cadastros } from "../cadastros/cadastros.model.js";
 import { MensagemView } from "../mensagem/mensagem.view.js";
+import { domInjector } from "../utils/decorators/dom.injector.js";
+import { LogarTempoDeExecucao } from "../utils/decorators/logar.tempo.execucao.js";
 import { DiaSemana } from "../utils/Enums.js";
 import { Cadastro } from "./cadastro.model.js";
 import { CadastroService } from "./cadastro.service.js";
@@ -7,22 +9,23 @@ import { CadastroView } from "./cadastro.view.js";
 
 export class CadastroController {
 
-    public readonly _nome:  HTMLInputElement;
-    public readonly _nascimento: HTMLInputElement;
-    public readonly _idade: HTMLInputElement;
+    @domInjector('#nome')
+    public readonly _nome!:  HTMLInputElement;
+    @domInjector('#data')
+    public readonly _nascimento!: HTMLInputElement;
+    @domInjector('#idade')
+    public readonly _idade!: HTMLInputElement;
+    
     private cadastroService = new CadastroService();
     private cadastroView = new CadastroView('cadastros');
     private cadastros = new Cadastros();
     private mensagemView = new MensagemView('mensagem');
 
-    constructor (
-    ) {
-        this._nome = document.querySelector('#nome') as HTMLInputElement;
-        this._nascimento = document.querySelector('#data') as HTMLInputElement;
-        this._idade = document.querySelector('#idade') as HTMLInputElement;
+    constructor () {
         this.cadastroView.update(this.cadastros);
     }
 
+    @LogarTempoDeExecucao()
     public async cadastro(req: Cadastro) {
         // const response = this.cadastroService.cadastrar(req);
         if(!this.ehDiaUtil(req.nascimento)) {
@@ -34,13 +37,6 @@ export class CadastroController {
         this.limparFormulario();
     }
 
-    public criarCadastro(): Cadastro {
-        const exp = /-/g;
-        const nome = String(this._nome.value);
-        const nascimento = new Date(this._nascimento.value.replace(exp, ','));
-        const idade = Number(this._idade?.value);
-        return new Cadastro( nome, nascimento, idade);
-    }
 
     private limparFormulario(): void {
         this._nome.value = "";
