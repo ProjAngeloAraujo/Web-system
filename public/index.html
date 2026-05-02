@@ -2,34 +2,73 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Formulário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB-SYSTEM | Cadastro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+    .container { max-width: 800px; margin-top: 50px; }
+    .card { border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  </style>
 </head>
 <body>
 
-  <h2>Cadastro</h2>
+  <div class="container">
+    <!-- Cabeçalho -->
+    <div class="text-center mb-4">
+      <h1 class="display-5 fw-bold text-primary">WEB-SYSTEM</h1>
+      <p class="text-muted">Gestão de Cadastros e Importação de Dados</p>
+    </div>
 
-  <div id="mensagem"></div>
+    <div id="mensagem"></div>
 
-  <form id="formCadastro">
-    <label for="nome">Nome:</label><br>
-    <input type="text" id="nome" name="nome"><br><br>
+    <div class="row g-4">
+      <!-- Coluna do Formulário -->
+      <div class="col-12">
+        <div class="card p-4">
+          <h2 class="h4 mb-3">Novo Cadastro</h2>
+          <form id="formCadastro" class="row g-3">
+            
+            <div class="col-md-12">
+              <label for="nome" class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex: Cleber Oliveira" required>
+            </div>
 
-    <label for="data">Data de Nascimento:</label><br>
-    <input type="date" id="data" name="data"><br><br>
+            <div class="col-md-8">
+              <label for="data" class="form-label">Data de Nascimento</label>
+              <input type="date" class="form-control" id="data" name="data" required>
+            </div>
 
-    <label for="idade">Idade:</label><br>
-    <input type="number" id="idade" name="idade"><br><br>
+            <div class="col-md-4">
+              <label for="idade" class="form-label">Idade</label>
+              <input type="number" class="form-control" id="idade" name="idade" placeholder="0" required>
+            </div>
 
-    <button type="submit">Enviar</button>
-  </form>
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+              <button id="botao-importa" class="btn btn-outline-secondary px-4" type="button">
+                <i class="bi bi-download"></i> Importar Dados
+              </button>
+              <button type="submit" class="btn btn-primary px-5">Salvar Registro</button>
+            </div>
+          </form>
+        </div>
+      </div>
 
-  <button id="botao-importa" class="btn btn-primary">Importar</button>
 
-  <div id="cadastros"></div>
+      <div class="col-12">
+        <div class="card p-4">
+          <h2 class="h4 mb-3">Registros Confirmados</h2>
+          <div id="cadastros" class="table-responsive">
+            <p class="text-center text-muted py-4">Nenhum registro encontrado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/dist/cadastro/cadastro.form.js"></script>
   <script type="module" src="/dist/importa/importa.form.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </body>
 </html>
