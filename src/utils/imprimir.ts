@@ -1,4 +1,4 @@
-import { Imprimivel } from "./imprimivel.js";
+import { Imprimivel } from "./models/imprimivel.js";
 
 export function imprimir(...objetos: Imprimivel[]): void {
     for(const objeto of objetos) {

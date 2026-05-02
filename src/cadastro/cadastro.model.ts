@@ -1,6 +1,7 @@
-import { Imprimivel } from "../utils/imprimivel.js";
 
-export class Cadastro implements Imprimivel {
+import { Modelo } from "../utils/models/modelo.js";
+
+export class Cadastro implements Modelo<Cadastro> {
     constructor(
         public readonly nome: string, 
         public readonly nascimento: Date, 
@@ -21,6 +22,12 @@ export class Cadastro implements Imprimivel {
             Idade: ${this.idade},
             Nascimento: ${this.nascimento}
         `;
+    }
+
+    public ehIgual(cadastro: Cadastro): boolean {
+        return this.nascimento.getDate() === cadastro.nascimento.getDate()
+            && this.nascimento.getMonth() === cadastro.nascimento.getMonth()
+            && this.nascimento.getFullYear() === cadastro.nascimento.getFullYear()
     }
 
 }

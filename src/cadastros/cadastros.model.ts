@@ -1,7 +1,7 @@
 import { Cadastro } from "../cadastro/cadastro.model.js";
-import { Imprimivel } from "../utils/imprimivel.js";
+import { Modelo } from "../utils/models/modelo.js";
 
-export class Cadastros implements Imprimivel {
+export class Cadastros implements Modelo<Cadastros> {
    
     private Cadastros: Cadastro[] = [];
     
@@ -16,5 +16,9 @@ export class Cadastros implements Imprimivel {
 
     public paraTexto(): string {
         return JSON.stringify(this.Cadastros, null, 2)
+    }
+
+    public ehIgual(cadastros: Cadastros): boolean {
+        return JSON.stringify(this.Cadastros) === JSON.stringify(cadastros);
     }
 }

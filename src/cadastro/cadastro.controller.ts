@@ -18,7 +18,7 @@ export class CadastroController {
     
     private cadastroService = new CadastroService();
     private cadastroView = new CadastroView('cadastros');
-    private cadastros = new Cadastros();
+    public cadastros = new Cadastros();
     private mensagemView = new MensagemView('mensagem');
 
     constructor () {
