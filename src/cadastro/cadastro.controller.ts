@@ -28,11 +28,13 @@ export class CadastroController {
     @LogarTempoDeExecucao()
     public async cadastro(req: Cadastro) {
         // const response = this.cadastroService.cadastrar(req);
-        if(!this.ehDiaUtil(req.nascimento)) {
-            this.mensagemView.update('A pessoa não nasceu em um dia util!')
-            return;
-        };
+        // if(!this.ehDiaUtil(req.nascimento)) {
+        //     this.mensagemView.update('A pessoa não nasceu em um dia util!')
+        //     return;
+        // };
         this.cadastros.adicionar(req);
+        console.log(req.paraTexto());
+        console.log(this.cadastros.paraTexto());
         this.updateView();
         this.limparFormulario();
     }
@@ -52,5 +54,6 @@ export class CadastroController {
     private ehDiaUtil(data: Date): boolean {
         return data.getDay() > DiaSemana.DOMINGO && data.getDay() < DiaSemana.SABADO;
     }
+
     
 }

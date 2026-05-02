@@ -39,6 +39,12 @@ export class CadastroView extends View<Cadastros> {
     }
 
     private formatar(data: Date): string {
-        return new Intl.DateTimeFormat().format(data);
+        const dataObjeto = data instanceof Date ? data : new Date(data);
+
+        if (isNaN(dataObjeto.getTime())) {
+            return 'Data inválida';
+        }
+
+        return new Intl.DateTimeFormat().format(dataObjeto);
     }
 }

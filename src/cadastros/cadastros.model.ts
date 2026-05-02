@@ -1,6 +1,7 @@
 import { Cadastro } from "../cadastro/cadastro.model.js";
+import { Imprimivel } from "../utils/imprimivel.js";
 
-export class Cadastros {
+export class Cadastros implements Imprimivel {
    
     private Cadastros: Cadastro[] = [];
     
@@ -11,5 +12,9 @@ export class Cadastros {
 
     public listar(): readonly Cadastro[] {
         return this.Cadastros;
+    }
+
+    public paraTexto(): string {
+        return JSON.stringify(this.Cadastros, null, 2)
     }
 }

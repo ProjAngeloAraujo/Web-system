@@ -1,3 +1,6 @@
+import { ImportaController } from "./importa.controller.js";
+
+const importaController = new ImportaController();
 
 document.addEventListener('DOMContentLoaded', () => {
     const importa = document.querySelector('#botao-importa') as HTMLElement;
@@ -7,6 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     importa.addEventListener('click', () => {
-
+        importaController.importar();
     })
 });

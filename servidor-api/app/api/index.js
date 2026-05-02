@@ -5,10 +5,10 @@ var api = {}
 api.dados = function(req, res) {
 
     res.json([
-        { montante: 200.5, vezes: 2 },
-        { montante: 100.2, vezes: 5 },
-        { montante: 50.5, vezes: 1 },
-        { montante: 70.5, vezes: 2 }
+        { nome: 'Cleber', idade: 2, nascimento: '2001-04-10' },
+        { nome: 'João', idade: 5, nascimento: '2001-04-11' },
+        { nome: 'Gustavo', idade: 1, nascimento: '2001-04-12'},
+        { nome: 'Pedro', idade: 2, nascimento: '2001-04-13' }
     ]);
     
 };
